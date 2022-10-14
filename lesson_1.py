@@ -18,6 +18,9 @@ def bt_checker(a,b,c):
     a = a.encode('utf-8')
     b = b.encode('utf-8')
     c = c.encode('utf-8')
+    a = a.decode('utf-8')
+    b = b.dencode('utf-8')
+    c = c.dencode('utf-8')
     type_checker(a,b,c)
 
 bt_checker(r,s,d)
@@ -34,13 +37,15 @@ print(type(m),m, len(m))
 
 print(3)
 #  Определить, какие из слов «attribute», «класс», «функция», «type» невозможно записать в байтовом типе.
-a = bytes('attribute', 'utf-8')
-c = bytes('класс', 'utf-8')
-f = bytes('функция', 'utf-8')
-t = bytes('type', 'utf-8')
-
-print(a,c,f,t)
-print(t, 'Невозможно записать в байтовом типе')
+try:   # Но здесь не выбрасывается исключение, зачем try/exept?
+    a = bytes('attribute', 'utf-8')
+    c = bytes('класс', 'utf-8')
+    f = bytes('функция', 'utf-8')
+    t = bytes('type', 'utf-8')
+    print(a, c, f, t)
+    print(t, 'Невозможно записать в байтовом типе')
+except:
+    print('Exeption')
 
 print(4)
 # 4. Преобразовать слова «разработка», «администрирование», «protocol», «standard» из строкового представления
@@ -60,13 +65,15 @@ print(5)
 # 5. Выполнить пинг веб-ресурсов yandex.ru, youtube.com и преобразовать результаты из байтовового
 # в строковый тип на кириллице.
 import subprocess
+import chardet
 
 def ping_checker(host):
 
     args = ['ping', host]
     subproc_ping = subprocess.Popen(args, stdout=subprocess.PIPE)
     for line in subproc_ping.stdout:
-        line = line.decode('cp866').encode('utf-8')
+        result = chardet.detect(line)
+        line = line.decode(result['encoding']).encode('utf-8')
         print(line.decode('utf-8'))
 
 ping_checker('google.com')
