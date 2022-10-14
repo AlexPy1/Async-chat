@@ -56,10 +56,11 @@ a = 'администрирование'
 p = 'protocol'
 s = 'standard'
 
-r,a,p,s = r.encode('utf-8'), a.encode('utf-8'), p.encode('utf-8'), s.encode('utf-8')
-print(r,a,p,s)
-r,a,p,s = r.decode('utf-8'), a.decode('utf-8'), p.decode('utf-8'), s.decode('utf-8')
-print(r,a,p,s)
+for i in (r,a,p,s):
+    i = i.encode('utf-8')
+    print(i)
+    i = i.decode('utf-8')
+    print(i)
 
 print(5)
 # 5. Выполнить пинг веб-ресурсов yandex.ru, youtube.com и преобразовать результаты из байтовового
