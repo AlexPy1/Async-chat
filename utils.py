@@ -1,6 +1,6 @@
 import json
 
-from log.client_log_config import MyLogger
+from logs.client_log_config import MyLogger
 
 
 @MyLogger()
